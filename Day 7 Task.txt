@@ -1,0 +1,30 @@
+1. Solving problems using array functions on the rest countries' data.
+
+var request= new XMLHttpRequest()
+request.open('GET','https://restcountries.com/v3.1/all');
+request.send()
+request.onload=function()
+{
+var data=request.response
+var finalData=JSON.parse(data)
+console.log(finalData)
+
+//a. Get all the countries from the Asia continent /region using the Filter function
+var countries= finalData.filter((element)=>element.continents=="Asia" || element.region=="Asia")
+console.log(countries);
+
+//b. Get all the countries with a population of less than 2 lakhs using Filter function
+var countries1=finalData.filter((element)=>element.population<200000)
+console.log(countries1)
+
+//c. Print the following details name, capital, flag using forEach function
+var countries2=finalData.forEach((element)=>console.log(element.name.common,element.capital,element.flag));            
+
+//d. Print the total population of countries using reduce function
+var totalPopulation=finalData.reduce((acc,element)=>acc+element.population,0)
+console.log(totalPopulation);
+
+//e. Print the country which uses US Dollars as currency
+var countries3=finalData.filter((element)=>element?.currencies?.USD);
+console.log(countries3);
+}
